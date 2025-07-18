@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>{%block title%}{%endblock title%}</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="{% static 'css/style.css' %}?v=1">
+        <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+    </head>
+    <body>
+        <header class="header sticky-top">
+            <div class="header-nav d-flex flex-row">
+                <ul class="header-list d-flex flex-row">
+                    <li><a href='/' class="nav-a m-3">Home</a></li>
+                    <li><a href='/' class="nav-a m-3">Watch</a></li>
+                    {% comment %} {% if not request.user.is_authenticated %}
+                        <li><a href='/login/' class="nav-a m-3">Authorize</a></li>
+                    {% else %}
+                        <li><a href='/logout/' class="nav-a m-3">Logout</a></li>
+                    {% endif %} {% endcomment %}
+                </ul>
+            </div>
+        </header>
+        <div class="container">
+            {%block content%}{%endblock content%}
+        </div>
+        <footer class="footer mt-2">
+            <div>
+                <h6 style="height: 100%; padding: 0; margin: 0;">video player site©</h6 >
+            </div>
+        </footer>
+    </body>
+</html>
