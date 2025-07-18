@@ -1,5 +1,6 @@
 import os
 from django.db import models
+from django.urls import reverse
 
 def images_upload_to(instance, filename):
     category_slug = instance.category.slug if instance.category else 'uncategorized'
@@ -37,3 +38,7 @@ class Video(models.Model):
 
     def __str__(self):
         return str(self.name)
+    
+    def get_absolute_url(self):
+        return reverse("videos:video_details", args=[self.slug])
+    

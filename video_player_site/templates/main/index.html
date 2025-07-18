@@ -2,4 +2,14 @@
 {% load static %}
 {% block title %}Title{% endblock title %}
 
-{% block content %}<h1>Hello world!</h1>{% endblock content %}
+{% block content %}
+    {% for video in videos %}
+        <div class="video-card">
+            <a href="{{video.get_absolute_url}}">
+                <img src="{{ video.image.url }}" class="video-image-card"/>
+                <h5>{{video.name}}</h5>
+                <h6>{{video.category}}</h6>
+            </a>
+        </div>
+    {% endfor %}
+{% endblock content %}

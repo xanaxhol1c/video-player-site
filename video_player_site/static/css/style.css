@@ -61,6 +61,14 @@ li {
     flex: 1;
 }
 
+/* styles for index page */
+
+.video-image-card{
+    display: flex;
+    width: 400px;
+    height: 300px;
+}
+
 footer{
     bottom: 0;
     width: 100%;

@@ -1,0 +1,18 @@
+{% extends "layout.html" %}
+{% load static %}
+{% block title %}Details{% endblock title %}
+
+{% block content %}
+    <h1>Details</h1>
+    <h3>{{ video.name }}</h3>
+    <video 
+        id="my-video" 
+        class="video-js" 
+        controls 
+        preload="auto" 
+        width="640" 
+        height="360"
+        data-setup="{}">
+        <source src="{% url 'videos:stream_video' video.id %}" type="video/mp4"/>
+    </video>
+{% endblock content %}
