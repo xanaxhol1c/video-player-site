@@ -1,25 +1,38 @@
 {% extends "layout.html" %}
 {% load static %}
-{% block title %}Details{% endblock title %}
+{% block title %}{{video.name}}{% endblock title %}
 
 {% block content %}
-    {% comment %} <video 
-        id="my-video" 
-        class="video-js" 
-        controls 
-        preload="auto" 
-        width="640" 
-        height="360"
-        data-setup="{}">
-        <source src="{% url 'videos:stream_video' video.id %}" type="video/mp4"/>
-    </video> {% endcomment %}
-    <iframe
-    class="player-frame mt-3"
-    src={{video.get_streaming_src}}
-    allow="autoplay; fullscreen; encrypted-media; picture-in-picture"
-    allowfullscreen
-    frameborder="0"
-    ></iframe>
-    <h3 class="mt-2">{{ video.name }}</h3>
-    <h5 class="description-text mt-2">{{ video.description }}</h5>
+    <div class="d-flex flex-row" style="gap: 25px;">
+        <div class="d-flex video-container">
+            <iframe
+            class="player-frame mt-3"
+            src={{video.get_streaming_src}}
+            allow="autoplay; fullscreen; encrypted-media; picture-in-picture"
+            allowfullscreen
+            frameborder="0"
+            ></iframe>
+            <h3 class="mt-2">{{ video.name }}</h3>
+            <span class="description-span mt-2">
+                <h5 class="description-text m-2">{{ video.description }}</h5>
+            </span>
+        </div>
+        <div class="d-flex flex-column mt-3 recommendations-container">
+            <div class="row row-cols-1 g-3">
+                {% for recommended_video in recommendations %}
+                <div class="col">
+                    <div class="card h-100 shadow-sm">
+                    <a href="{{ recommended_video.get_absolute_url }}">
+                        <img src="{{ recommended_video.image.url }}" class="card-img-top video-image-card" alt="{{ video.name }}">
+                    </a>
+                    <div class="card-body">
+                        <h5 class="card-title">{{ recommended_video.name }}</h5>
+                        <p class="card-text text-muted">{{ recommended_video.category }}</p>
+                    </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
 {% endblock content %}

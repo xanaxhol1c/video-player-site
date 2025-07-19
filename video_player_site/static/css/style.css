@@ -70,18 +70,46 @@ li {
     display: block;
 }
 
-/*styles for video details */
+/* styles for video details */
+
+.video-container{
+    display; flex;
+    flex-direction: column;
+    width: 75%;
+    gap: 15px;
+}
 
 .player-frame {
     aspect-ratio: 16 / 9;
-    width: 70%;
+    width: 100%;
     height: auto;
     object-fit: cover; 
     display: block;
 }
 
-.description-text{
-    white-space: pre;
+.description-span{
+    border: solid 1px; 
+    border-radius: 10px;
+}
+
+.description-text {
+    white-space: pre-wrap;     
+    word-wrap: break-word;     
+    overflow-wrap: break-word; 
+    max-width: 100%;           
+}
+
+.video-image-card{
+    aspect-ratio: 16 / 9;
+    width: 100%;
+    object-fit: cover; 
+    display: block;
+}
+
+.recommendations-container{
+    display: flex;
+    width: 20%;
+    align-items: center;
 }
 
 footer{
