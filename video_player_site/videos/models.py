@@ -1,6 +1,9 @@
 import os
 from django.db import models
 from django.urls import reverse
+from video_player_site.settings import CLOUD_NAME
+from cloudinary.models import CloudinaryField
+
 
 def images_upload_to(instance, filename):
     category_slug = instance.category.slug if instance.category else 'uncategorized'
@@ -27,8 +30,8 @@ class Video(models.Model):
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True)
     slug = models.CharField(max_length=100, unique=True)
     description = models.TextField(max_length=400)
-    image = models.ImageField(upload_to=images_upload_to)
-    video = models.FileField(upload_to=videos_upload_to)
+    image = CloudinaryField('image', resource_type='image')
+    video = CloudinaryField('video', resource_type='video')
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
@@ -41,4 +44,9 @@ class Video(models.Model):
     
     def get_absolute_url(self):
         return reverse("videos:video_details", args=[self.slug])
+    
+    def get_streaming_src(self):
+        path = str(self.video)
+        public_id = path.split('/')[-1].split('.')[0]
+        return f"https://player.cloudinary.com/embed/?cloud_name={CLOUD_NAME}&public_id={public_id}&profile=cld-default"
     

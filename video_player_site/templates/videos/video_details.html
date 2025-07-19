@@ -3,9 +3,7 @@
 {% block title %}Details{% endblock title %}
 
 {% block content %}
-    <h1>Details</h1>
-    <h3>{{ video.name }}</h3>
-    <video 
+    {% comment %} <video 
         id="my-video" 
         class="video-js" 
         controls 
@@ -14,5 +12,14 @@
         height="360"
         data-setup="{}">
         <source src="{% url 'videos:stream_video' video.id %}" type="video/mp4"/>
-    </video>
+    </video> {% endcomment %}
+    <iframe
+    class="player-frame mt-3"
+    src={{video.get_streaming_src}}
+    allow="autoplay; fullscreen; encrypted-media; picture-in-picture"
+    allowfullscreen
+    frameborder="0"
+    ></iframe>
+    <h3 class="mt-2">{{ video.name }}</h3>
+    <h5 class="description-text mt-2">{{ video.description }}</h5>
 {% endblock content %}

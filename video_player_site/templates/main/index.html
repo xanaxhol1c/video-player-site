@@ -3,13 +3,21 @@
 {% block title %}Title{% endblock title %}
 
 {% block content %}
-    {% for video in videos %}
-        <div class="video-card">
-            <a href="{{video.get_absolute_url}}">
-                <img src="{{ video.image.url }}" class="video-image-card"/>
-                <h5>{{video.name}}</h5>
-                <h6>{{video.category}}</h6>
+<div class="container mt-4">
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
+        {% for video in videos %}
+        <div class="col">
+            <div class="card h-100 shadow-sm">
+            <a href="{{ video.get_absolute_url }}">
+                <img src="{{ video.image.url }}" class="card-img-top video-image-card" alt="{{ video.name }}">
             </a>
+            <div class="card-body">
+                <h5 class="card-title">{{ video.name }}</h5>
+                <p class="card-text text-muted">{{ video.category }}</p>
+            </div>
+            </div>
         </div>
-    {% endfor %}
+        {% endfor %}
+    </div>
+</div>
 {% endblock content %}

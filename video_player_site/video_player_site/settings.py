@@ -15,11 +15,10 @@ from dotenv import load_dotenv
 
 import os
 
-load_dotenv()
-
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+load_dotenv(os.path.join(BASE_DIR, '.env'))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
@@ -45,6 +44,8 @@ INSTALLED_APPS = [
     'main',
     'videos',
     'debug_toolbar',
+    'cloudinary', 
+    'cloudinary_storage',
 ]
 
 MIDDLEWARE = [
@@ -59,6 +60,18 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'video_player_site.urls'
+
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+
+CLOUD_NAME= os.getenv('CLOUDINARY_NAME')
+API_KEY=os.getenv('CLOUDINARY_API_KEY')
+API_SECRET=os.getenv('CLOUDINARY_API_SECRET')
+
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': CLOUD_NAME,
+    'API_KEY': API_KEY,
+    'API_SECRET': API_SECRET
+}
 
 TEMPLATES = [
     {
