@@ -19,5 +19,20 @@
         </div>
         {% endfor %}
     </div>
+    <div class="chart-paginator">
+        <li class="{% if not videos.has_previous %}disabled{%else%}paginator-li{%endif%}">
+            <a href="{% if videos.has_previous %}?page={{videos.previous_page_number}}{%endif%}" class="{% if not videos.has_previous %}disabled{%endif%}">Previous</a>
+        </li>
+        {% for page in videos.paginator.page_range %}
+            {% if page >= videos.number|add:-2 and page <= videos.number|add:2 %}
+                <li>
+                    <a href="?page={{page}}" class="{% if videos.number == page %}disabled{%else%}paginator-li{%endif%}">{{page}}</a>
+                </li>
+            {% endif %}
+        {% endfor %}
+        <li class="{% if not videos.has_next %}disabled{%else%}paginator-li{%endif%}">
+            <a href="{% if videos.has_next %}?page={{videos.next_page_number}}{%endif%}" class="{% if not videos.has_next %}disabled{%endif%}">Next</a>
+        </li>
+    </div>
 </div>
 {% endblock content %}

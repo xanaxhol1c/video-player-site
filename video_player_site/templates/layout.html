@@ -16,8 +16,8 @@
             <div class="header-nav d-flex flex-row">
                 <ul class="header-list d-flex flex-row">
                     <li><a href='/' class="nav-a m-3">Home</a></li>
-                    <li><a href='/' class="nav-a m-3">Watch</a></li>
-                    {% comment %} {% if not request.user.is_authenticated %}
+                    {% comment %} <li><a href='/' class="nav-a m-3">Watch</a></li> 
+                    {% if not request.user.is_authenticated %}
                         <li><a href='/login/' class="nav-a m-3">Authorize</a></li>
                     {% else %}
                         <li><a href='/logout/' class="nav-a m-3">Logout</a></li>

@@ -70,10 +70,25 @@ li {
     display: block;
 }
 
+.chart-paginator {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-top: auto;
+    padding: 15px 0;
+}
+
+.disabled{
+    text-decoration: none;
+    color: grey;
+}
+
 /* styles for video details */
 
 .video-container{
-    display; flex;
+    display: flex;
     flex-direction: column;
     width: 75%;
     gap: 15px;
