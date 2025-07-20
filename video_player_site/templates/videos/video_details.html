@@ -13,6 +13,9 @@
             frameborder="0"
             ></iframe>
             <h3 class="mt-2">{{ video.name }}</h3>
+            <button id="like-btn" data-slug="{{ video.slug }}" class="btn btn-primary">
+                👍 Like (<span id="like-count">{{ video.likes }}</span>)
+            </button>
             <span class="description-span mt-2">
                 <h5 class="description-text m-2">{{ video.description }}</h5>
             </span>
@@ -35,4 +38,27 @@
             </div>
         </div>
     </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const likeBtn = document.getElementById('like-btn');
+            likeBtn.addEventListener('click', function() {
+                const slug = this.dataset.slug;
+
+                fetch("{% url 'videos:like_video' %}", {
+                    method: "POST",
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                        'X-CSRFToken': '{{ csrf_token }}'
+                    },
+                    body: new URLSearchParams({
+                        'slug': slug
+                    })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('like-count').textContent = data.likes;
+                });
+            });
+        });
+        </script>
 {% endblock content %}

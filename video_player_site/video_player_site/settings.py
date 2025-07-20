@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 
 from pathlib import Path
 from dotenv import load_dotenv
+import cloudinary
 
 import os
 
@@ -31,6 +32,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+AUTH_USER_MODEL = 'authorization.UserModel'
 
 # Application definition
 
@@ -43,6 +45,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'main',
     'videos',
+    'authorization',
     'debug_toolbar',
     'cloudinary', 
     'cloudinary_storage',
@@ -63,15 +66,25 @@ ROOT_URLCONF = 'video_player_site.urls'
 
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
-CLOUD_NAME= os.getenv('CLOUDINARY_NAME')
+CLOUD_NAME=os.getenv('CLOUDINARY_NAME')
 API_KEY=os.getenv('CLOUDINARY_API_KEY')
 API_SECRET=os.getenv('CLOUDINARY_API_SECRET')
+
+print(CLOUD_NAME)
+print(API_KEY)
+print(API_SECRET)
 
 CLOUDINARY_STORAGE = {
     'CLOUD_NAME': CLOUD_NAME,
     'API_KEY': API_KEY,
     'API_SECRET': API_SECRET
 }
+
+cloudinary.config(
+    cloud_name=CLOUD_NAME,
+    api_key=API_KEY,
+    api_secret=API_SECRET
+)
 
 TEMPLATES = [
     {

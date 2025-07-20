@@ -1,8 +1,8 @@
 from django.shortcuts import render, get_object_or_404
 from .models import Video
-from .utils import open_file
-from django.http import StreamingHttpResponse
 from django.db.models import Case, When, Value, IntegerField
+from django.http import JsonResponse
+from django.views.decorators.http import require_POST
 
 # Create your views here.
 def video_details(request, slug=None):
@@ -19,6 +19,14 @@ def video_details(request, slug=None):
     ).order_by('priority').exclude(name=video.name)[:4]
     return render(request, 'videos/video_details.html', {'video' : video, 'recommendations' : recommendations})
 
+@require_POST
+def like_video(request):
+    slug = request.POST.get('slug')
+    video = get_object_or_404(Video, slug=slug)
+
+    video.like()
+
+    return JsonResponse({'likes' : video.likes})
 # def stream_video(request, video_id):
 #     file, status_code, content_length, content_range = open_file(request, video_id)
 #     response = StreamingHttpResponse(file, status=status_code, content_type='video/mp4')

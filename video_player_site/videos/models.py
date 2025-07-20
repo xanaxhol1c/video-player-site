@@ -1,7 +1,7 @@
 import os
 from django.db import models
 from django.urls import reverse
-from video_player_site.settings import CLOUD_NAME
+from django.conf import settings
 from cloudinary.models import CloudinaryField
 
 
@@ -33,7 +33,20 @@ class Video(models.Model):
     image = CloudinaryField('image', resource_type='image')
     video = CloudinaryField('video', resource_type='video')
     created_at = models.DateTimeField(auto_now_add=True)
+    _likes = models.SmallIntegerField(default=0, db_column='likes')
 
+    @property
+    def likes(self):
+        return self._likes
+    
+    def like(self):
+        self._likes += 1
+        self.save(update_fields=['_likes'])
+
+    def dislike(self):
+        self._likes -= 1
+        self.save(update_fields=['_likes'])
+            
     class Meta:
         ordering = ['name']
         verbose_name = 'Video'
@@ -48,5 +61,5 @@ class Video(models.Model):
     def get_streaming_src(self):
         path = str(self.video)
         public_id = path.split('/')[-1].split('.')[0]
-        return f"https://player.cloudinary.com/embed/?cloud_name={CLOUD_NAME}&public_id={public_id}&profile=cld-default"
+        return f"https://player.cloudinary.com/embed/?cloud_name={settings.CLOUD_NAME}&public_id={public_id}&profile=cld-default"
     
