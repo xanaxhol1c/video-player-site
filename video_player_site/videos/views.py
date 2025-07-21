@@ -6,9 +6,20 @@ from django.http import JsonResponse
 from django.views.decorators.http import require_POST
 from django.contrib.auth.decorators import login_required
 
+from django.core.cache import cache
+from django.db.models import F
+
 # Create your views here.
 def video_details(request, slug=None):
     video = get_object_or_404(Video, slug=slug)
+
+    if request.user.is_authenticated:
+        key = f'view:{request.user}:{video.id}'
+
+        if not cache.get(key):
+            Video.objects.filter(id=video.id).update(views=F('views') + 1)
+            cache.set(key, 1, timeout=3600)
+
 
     category = video.category
 

@@ -14,9 +14,14 @@
             ></iframe>
             <div>
                 <h3 class="mt-2">{{ video.name }}</h3>
-                <button id="like-btn" class="video-like-btn" data-video-id={{video.id}}>
-                    <h4 id="like-count">❤️{{video.userlikes_set.count}}</h4>
-                </button>
+                <div class="d-flex flex-row" style="gap: 10px;">
+                    {% if video.views %}
+                        <h4>{{video.views}} views</h4>
+                    {% endif %}
+                    <button id="like-btn" class="video-like-btn" data-video-id={{video.id}}>
+                        <h4 id="like-count">❤️{{video.userlikes_set.count}}</h4>
+                    </button>
+                </div>
                 {% if not request.user.is_authenticated%}
                     <p id="message-tag" class="alert alert-warning" style="display: none;">Please login to like this video</p>
                 {% endif %}

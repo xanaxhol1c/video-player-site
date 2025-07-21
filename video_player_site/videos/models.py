@@ -33,20 +33,8 @@ class Video(models.Model):
     image = CloudinaryField('image', resource_type='image')
     video = CloudinaryField('video', resource_type='video')
     created_at = models.DateTimeField(auto_now_add=True)
-    _likes = models.SmallIntegerField(default=0, db_column='likes')
+    views = models.SmallIntegerField(default=0)
 
-    @property
-    def likes(self):
-        return self._likes
-    
-    def like(self):
-        self._likes += 1
-        self.save(update_fields=['_likes'])
-
-    def dislike(self):
-        self._likes -= 1
-        self.save(update_fields=['_likes'])
-            
     class Meta:
         ordering = ['name']
         verbose_name = 'Video'
