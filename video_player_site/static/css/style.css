@@ -102,6 +102,12 @@ li {
     display: block;
 }
 
+.video-like-btn{
+    all: unset;
+    display: flex;
+    cursor: pointer;
+}
+
 .description-span{
     border: solid 1px; 
     border-radius: 10px;
