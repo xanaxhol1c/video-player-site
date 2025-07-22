@@ -12,4 +12,4 @@ class VideoAdmin(admin.ModelAdmin):
     list_display = ['name', 'category', 'slug', 'description', 'image', 'video', 'created_at']
     list_filter = ['name', 'category', 'created_at']
     prepopulated_fields = {'slug' : ('name',)}
-
+    readonly_fields = ['views']
