@@ -19,6 +19,7 @@
                     {% if not request.user.is_authenticated %}
                         <li><a href='/login/' class="nav-a m-3">Login</a></li>
                     {% else %}
+                        <li><a href='/videos/likes/' class="nav-a m-3">Likes</a></li>
                         <li><a href='/logout/' class="nav-a m-3">Logout</a></li>
                     {% endif %} 
                 </ul>

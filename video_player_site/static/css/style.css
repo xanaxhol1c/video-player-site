@@ -111,6 +111,7 @@ li {
 .description-span{
     border: solid 1px; 
     border-radius: 10px;
+    background-color: #fafafa;
 }
 
 .description-text {
@@ -132,6 +133,38 @@ li {
     width: 20%;
     align-items: center;
 }
+
+/* styles for liked videos page */
+
+.liked-videos-list {
+    padding: 0;
+}
+
+.liked-video-item {
+    border: 1px solid #eee;
+    padding: 10px 15px;
+    border-radius: 6px;
+    margin-bottom: 10px;
+    background-color: #fafafa;
+}
+
+.video-link {
+    font-weight: 500;
+    font-size: 16px;
+    text-decoration: none;
+    color: #333;
+}
+
+.video-link:hover {
+    text-decoration: underline;
+}
+
+.thumb-img {
+    width: 250px;
+    height: auto;
+    border-radius: 4px;
+}
+
 
 footer{
     bottom: 0;

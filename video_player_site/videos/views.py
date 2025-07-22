@@ -47,12 +47,15 @@ def toggle_like(request, video_id):
         liked = True
 
     return JsonResponse({'liked' : liked, 'likes' : video.userlikes_set.count()})
-# def stream_video(request, video_id):
-#     file, status_code, content_length, content_range = open_file(request, video_id)
-#     response = StreamingHttpResponse(file, status=status_code, content_type='video/mp4')
 
-#     response['Accept-Ranges'] = 'bytes'
-#     response['Content-Length'] = str(content_length)
-#     response['Cache-Control'] = 'no-cache'
-#     response['Content-Range'] = content_range
-#     return response
+@login_required
+def get_likes(request):
+    user = request.user
+
+    liked_videos = UserLikes.objects.filter(user=user).select_related('video')
+
+    videos = [like.video for like in liked_videos]
+    
+    return render(request, 'videos/liked_videos.html', {'videos' : videos})
+
+    
