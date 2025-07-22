@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+{% load static %}
+{% block title %}For creators{% endblock title %}
+
+{% block content %}
+    <h1>For creators</h1>
+    <div class="mt-2">
+        <h3>Upload video</h3>
+        <form method="post" action='' enctype="multipart/form-data" class="d-flex flex-column" style="gap: 10px;">
+            {% csrf_token %}
+            <input name="name" placeholder="Video name"/>
+            <label>Select category</label>
+            <select name="category" placeholder="Category">
+                {% for category in categories %}
+                    <option value="{{category.id}}">{{category.name}}</option>
+                {% endfor %}
+            </select>
+            <input name="description" placeholder="Description"/>
+            <input type="file" name="image" accept=".jpg,.png"/>
+            <input type="file" name="video" accept=".mp4"/>
+            <button type="submit">Upload</button>
+        </form>
+
+    </div>
+
+{% endblock content%}

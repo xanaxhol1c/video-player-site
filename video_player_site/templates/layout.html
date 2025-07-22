@@ -20,6 +20,9 @@
                         <li><a href='/login/' class="nav-a m-3">Login</a></li>
                     {% else %}
                         <li><a href='/videos/likes/' class="nav-a m-3">Likes</a></li>
+                        {% if request.user.role.name == "Creator" %}
+                            <li><a href='/for-creators/' class="nav-a m-3">For creators</a></li>
+                        {% endif %}
                         <li><a href='/logout/' class="nav-a m-3">Logout</a></li>
                     {% endif %} 
                 </ul>
