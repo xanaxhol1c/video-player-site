@@ -1,6 +1,6 @@
 from django import forms
 from videos.models import Video
-from django.utils.text import slugify
+from pytils.translit import slugify
 
 class UploadVideoForm(forms.ModelForm):
     class Meta:

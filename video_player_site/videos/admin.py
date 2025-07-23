@@ -9,7 +9,7 @@ class CategoryAdmin(admin.ModelAdmin):
 
 @admin.register(Video)
 class VideoAdmin(admin.ModelAdmin):
-    list_display = ['name', 'category', 'slug', 'description', 'image', 'video', 'created_at']
-    list_filter = ['name', 'category', 'created_at']
+    list_display = ['name', 'category', 'slug', 'description', 'image', 'video', 'created_at', 'is_published']
+    list_filter = ['name', 'category', 'is_published', 'created_at']
     prepopulated_fields = {'slug' : ('name',)}
     readonly_fields = ['views']

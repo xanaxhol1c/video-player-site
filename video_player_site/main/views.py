@@ -1,6 +1,7 @@
 from .forms import UploadVideoForm
 from functools import wraps
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.urls import reverse
 from videos.models import Video, Category
 from django.core.paginator import Paginator
 from django.http.response import HttpResponseForbidden
@@ -24,7 +25,7 @@ def check_role(role_name):
 
 def index(request):
     page = request.GET.get('page', 1)
-    videos = Video.objects.all()
+    videos = Video.objects.filter(is_published=True)
     paginator = Paginator(videos, 3)
     
     current_page = paginator.page((int(page)))
@@ -39,7 +40,7 @@ def for_creators(request):
         if form.is_valid():
             form.save()
             print('form saved successfully')
-            #return redirect('main:upload_video_completed')
+            return redirect(reverse('main:upload_success'))
 
     else:
         form = UploadVideoForm()
@@ -47,3 +48,8 @@ def for_creators(request):
     categories = Category.objects.all()
 
     return render(request, 'main/for_creators.html', {'categories' : categories, 'form' : form})
+
+@login_required
+@check_role('Creator')
+def upload_success(request):
+    return render(request, 'main/upload_succecc.html')

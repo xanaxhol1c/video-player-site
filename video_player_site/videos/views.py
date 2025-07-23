@@ -11,7 +11,7 @@ from django.db.models import F
 
 # Create your views here.
 def video_details(request, slug=None):
-    video = get_object_or_404(Video, slug=slug)
+    video = get_object_or_404(Video, slug=slug, is_published=True)
 
     if request.user.is_authenticated:
         key = f'view:{request.user}:{video.id}'
@@ -23,7 +23,7 @@ def video_details(request, slug=None):
 
     category = video.category
 
-    recommendations = Video.objects.annotate(
+    recommendations = Video.objects.filter(is_published=True).annotate(
         priority=Case(
             When(category=category, then=Value(0)),
             default=Value(1),
@@ -54,7 +54,11 @@ def get_likes(request):
 
     liked_videos = UserLikes.objects.filter(user=user).select_related('video')
 
-    videos = [like.video for like in liked_videos]
+    videos = []
+
+    for like in liked_videos:
+        if like.video.is_published == True:
+            videos.append(like.video)
     
     return render(request, 'videos/liked_videos.html', {'videos' : videos})
 

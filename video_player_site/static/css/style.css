@@ -85,6 +85,61 @@ li {
     color: grey;
 }
 
+/* styles for registration page */
+
+.register-container {
+    max-width: 400px;
+    width: 100%;
+    margin: 50px auto;
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 16px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.register-title {
+    font-size: 1.8rem;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 25px;
+    color: #333;
+}
+
+.register-input {
+    height: 45px;
+    border-radius: 12px;
+    border: 1px solid #ccc;
+    padding: 10px 15px;
+    transition: border 0.2s ease-in-out;
+}
+
+.register-input:focus {
+    border-color: #007bff;
+    outline: none;
+    box-shadow: 0 0 5px rgba(0,123,255,0.25);
+}
+
+.register-btn {
+    height: 45px;
+    border-radius: 12px;
+    font-weight: 600;
+}
+
+.login-link {
+    text-align: center;
+    margin-top: 15px;
+    font-size: 0.95rem;
+}
+
+.login-link a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.login-link a:hover {
+    text-decoration: underline;
+}
+
 /* styles for video details */
 
 .video-container{
@@ -160,11 +215,65 @@ li {
 }
 
 .thumb-img {
+    aspect-ratio: 16 / 9;
     width: 250px;
     height: auto;
     border-radius: 4px;
+    object-fit: cover;
 }
 
+/* styles for uploading videos */
+
+.upload-video-input{
+    height: 45px;
+    width: 500px;
+    border-radius: 12px;
+    border: 1px solid #ccc;
+    padding: 10px 15px;
+    transition: border 0.2s ease-in-out;
+}
+
+.upload-video-select{
+    height: 45px;
+    width: 200px;
+    border-radius: 12px;
+    border: 1px solid #ccc;
+    padding: 10px 15px;
+    transition: border 0.2s ease-in-out;
+    
+}
+
+.upload-video-label{
+    width: 150px;
+}
+
+.upload-video-textarea {
+    width: 100%;
+    max-width: 500px;
+    height: 120px;
+    border-radius: 12px;
+    border: 1px solid #ccc;
+    padding: 10px 15px;
+    font-size: 16px;
+    line-height: 1.5;
+    resize: none; /* Вимикає зміну розміру */
+    text-align: left; /* Текст зліва (опціонально) */
+    font-family: inherit;
+    transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.upload-video-textarea:focus {
+    border-color: #007bff;
+    outline: none;
+    box-shadow: 0 0 4px rgba(0, 123, 255, 0.4);
+}
+
+.upload-video-btn{
+    height: 45px;
+    width: 250px;
+    border-radius: 10px;
+
+}
 
 footer{
     bottom: 0;

@@ -34,6 +34,7 @@ class Video(models.Model):
     video = CloudinaryField('video', resource_type='video')
     created_at = models.DateTimeField(auto_now_add=True)
     views = models.SmallIntegerField(default=0)
+    is_published = models.BooleanField(default=False)
 
     class Meta:
         ordering = ['name']

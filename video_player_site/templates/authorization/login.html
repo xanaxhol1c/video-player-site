@@ -4,13 +4,20 @@
 {% block title %}Login{% endblock title %}
 
 {% block content %}
-    <div class="d-flex flex-column">
-        <form method='POST' action='' class="d-flex flex-column" style="gap: 20px;">
+    <div class="register-container">
+        <div class="register-title">Login</div>
+        <form method="POST" action="">
             {% csrf_token %}
-            <input name='username' placeholder='username'/>
-            <input name='password' type='password' placeholder='password'/>
-            <button class="btn btn-primary" type='submit'>Register</button>
+            <div class="mb-3">
+                <input type="text" class="form-control register-input" name="username" placeholder="Username" required>
+            </div>
+            <div class="mb-3">
+                <input type="password" class="form-control register-input" name="password" placeholder="Password" required>
+            </div>
+            <button type="submit" class="btn btn-primary w-100 register-btn">Login</button>
         </form>
-        <p>Don't have an account? <a href='/register/' style="color: blue;">Register</a></p>
+        <div class="login-link">
+            Don't have an account? <a href="/login/">Register</a>
+        </div>
     </div>
 {% endblock content %}
