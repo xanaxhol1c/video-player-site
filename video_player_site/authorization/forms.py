@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.hashers import make_password
-from .models import UserModel
+from .models import UserModel, UserRoleRequest
 
 class UserRegistrationForm(forms.ModelForm):
     class Meta:
@@ -19,3 +19,8 @@ class UserRegistrationForm(forms.ModelForm):
             user.save()
 
         return user        
+    
+class CreateUserRoleRequest(forms.ModelForm):
+    class Meta:
+        model = UserRoleRequest
+        fields = ['role', 'message']

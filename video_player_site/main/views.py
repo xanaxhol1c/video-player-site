@@ -1,5 +1,7 @@
-from .forms import UploadVideoForm
 from functools import wraps
+from .forms import UploadVideoForm
+from authorization.forms import CreateUserRoleRequest
+from authorization.models import Role
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from videos.models import Video, Category
@@ -53,3 +55,24 @@ def for_creators(request):
 @check_role('Creator')
 def upload_success(request):
     return render(request, 'main/upload_succecc.html')
+
+@login_required
+def create_role_request(request):   
+    if request.method == 'POST':
+        form = CreateUserRoleRequest(request.POST)
+
+        if form.is_valid():
+            role_request = form.save(commit=False)
+            role_request.user = request.user
+
+            role_request.save()
+            
+            return redirect(reverse('main:index'))
+    
+    else:
+        form = CreateUserRoleRequest(request)
+
+        # roles = Role.objects.all().exclude(name__in=[request.user.role, 'User'])
+        roles = Role.objects.filter(name='Creator')
+
+    return render(request, 'main/create_role_request.html', {'form' : form, 'roles' : roles})

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Role, UserModel
+from .models import Role, UserModel, UserRoleRequest
 
 # Register your models here.
 @admin.register(Role)
@@ -25,3 +25,11 @@ class UserModelAdmin(admin.ModelAdmin):
     
     def has_add_permission(self, request):
         return False
+    
+@admin.register(UserRoleRequest)
+class UserRoleRequestAdmin(admin.ModelAdmin):
+    list_display = ['user', 'role', 'message', 'is_approved']
+    list_filter = ['is_approved', 'role']
+
+
+

@@ -34,3 +34,18 @@ class UserLikes(models.Model):
         unique_together = ('user', 'video')
     
     
+class UserRoleRequest(models.Model):
+    user = models.ForeignKey(UserModel, on_delete=models.CASCADE)
+    role = models.ForeignKey(Role, on_delete=models.CASCADE)
+    message = models.TextField(max_length=500)
+    is_approved = models.BooleanField(default=None, null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        verbose_name="Role Request"
+        verbose_name_plural="Role Requests"
+
+
+    def __str__(self):
+        return str(f'{self.user.username} -> {self.role.name}')
+
