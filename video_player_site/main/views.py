@@ -6,9 +6,12 @@ from django.shortcuts import render, redirect
 from django.urls import reverse
 from videos.models import Video, Category
 from django.core.paginator import Paginator
+from django.core.cache import caches
 from django.http.response import HttpResponseForbidden
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 
+secondary_cache = caches['secondary']
 
 def check_role(role_name):
     def wrapper(f):
@@ -59,20 +62,26 @@ def upload_success(request):
 @login_required
 def create_role_request(request):   
     if request.method == 'POST':
-        form = CreateUserRoleRequest(request.POST)
+        key = f'{request.user.username}'
+        
+        if not secondary_cache.get(key):
+            form = CreateUserRoleRequest(request.POST)
 
-        if form.is_valid():
-            role_request = form.save(commit=False)
-            role_request.user = request.user
+            if form.is_valid():
+                role_request = form.save(commit=False)
+                role_request.user = request.user
 
-            role_request.save()
-            
-            return redirect(reverse('main:index'))
-    
-    else:
-        form = CreateUserRoleRequest(request)
+                role_request.save()
 
-        # roles = Role.objects.all().exclude(name__in=[request.user.role, 'User'])
-        roles = Role.objects.filter(name='Creator')
+                secondary_cache.set(key, 1,timeout=86400)
+                return redirect(reverse('main:index'))
+        else:
+            messages.error(request, 'You can send role request not much that once in 24 hours')
+            return redirect(reverse('main:create_role_request'))
+
+    form = CreateUserRoleRequest()
+
+    # roles = Role.objects.all().exclude(name__in=[request.user.role, 'User'])
+    roles = Role.objects.filter(name='Creator')
 
     return render(request, 'main/create_role_request.html', {'form' : form, 'roles' : roles})

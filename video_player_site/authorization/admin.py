@@ -30,6 +30,20 @@ class UserModelAdmin(admin.ModelAdmin):
 class UserRoleRequestAdmin(admin.ModelAdmin):
     list_display = ['user', 'role', 'message', 'is_approved']
     list_filter = ['is_approved', 'role']
+    actions = ['approve_requests', 'deny_requests']
 
+    def approve_requests(self, request, queryset):
+        for req in queryset:
+            if req.is_approved == None:
+                req.is_approved = True
+                req.save()
+                user = req.user 
+                user.role = req.role
+                user.save()
+    
+    def deny_requests(self, request, queryset):
+        queryset.update(is_approved=False)
 
+    approve_requests.short_description = "✅ Approve selected requests"
+    deny_requests.short_description = "❌ Reject selected requests"
 
