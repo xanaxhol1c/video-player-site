@@ -32,8 +32,18 @@ class UserLikes(models.Model):
 
     class Meta:
         unique_together = ('user', 'video')
-    
-    
+
+class UserComments(models.Model):
+    user = models.ForeignKey(UserModel, on_delete=models.CASCADE)
+    video = models.ForeignKey(Video, on_delete=models.CASCADE)
+    comment = models.TextField(default=None, null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        verbose_name = "User Comment"
+        verbose_name_plural = "User Comments"
+
+
 class UserRoleRequest(models.Model):
     user = models.ForeignKey(UserModel, on_delete=models.CASCADE)
     role = models.ForeignKey(Role, on_delete=models.CASCADE)

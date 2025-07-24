@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Role, UserModel, UserRoleRequest
+from .models import Role, UserModel, UserRoleRequest, UserComments
 
 # Register your models here.
 @admin.register(Role)
@@ -47,3 +47,6 @@ class UserRoleRequestAdmin(admin.ModelAdmin):
     approve_requests.short_description = "✅ Approve selected requests"
     deny_requests.short_description = "❌ Reject selected requests"
 
+@admin.register(UserComments)
+class UserCommentsAdmin(admin.ModelAdmin):
+    list_display=['user', 'video', 'comment', 'created_at']

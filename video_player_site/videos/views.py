@@ -1,6 +1,8 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
+from django.urls import reverse
 from .models import Video
-from authorization.models import UserLikes
+from authorization.models import UserLikes, UserComments
+from authorization.forms import CreateCommentForm
 from django.db.models import Case, When, Value, IntegerField
 from django.http import JsonResponse
 from django.views.decorators.http import require_POST
@@ -13,6 +15,19 @@ from django.db.models import F
 def video_details(request, slug=None):
     video = get_object_or_404(Video, slug=slug, is_published=True)
 
+    if request.method == 'POST':
+        form = CreateCommentForm(request.POST)
+
+        if form.is_valid():
+            comment = form.save(commit=False)
+            
+            comment.user = request.user
+            comment.video = video
+
+            comment.save()
+        
+        return redirect(reverse('videos:video_details', args=[slug]))
+    
     if request.user.is_authenticated:
         key = f'view:{request.user}:{video.id}'
 
@@ -30,7 +45,15 @@ def video_details(request, slug=None):
             output_field=IntegerField()
         )
     ).order_by('priority').exclude(name=video.name)[:4]
-    return render(request, 'videos/video_details.html', {'video' : video, 'recommendations' : recommendations})
+
+    comments = UserComments.objects.filter(video=video)
+
+    form = CreateCommentForm()
+
+    return render(request, 'videos/video_details.html', {'video' : video, 
+                                                         'recommendations' : recommendations,
+                                                         'form' : form,
+                                                         'comments' : comments})
 
 @login_required
 @require_POST
@@ -61,5 +84,3 @@ def get_likes(request):
             videos.append(like.video)
     
     return render(request, 'videos/liked_videos.html', {'videos' : videos})
-
-    
