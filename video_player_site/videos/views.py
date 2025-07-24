@@ -16,6 +16,7 @@ def video_details(request, slug=None):
     video = get_object_or_404(Video, slug=slug, is_published=True)
 
     if request.method == 'POST':
+
         form = CreateCommentForm(request.POST)
 
         if form.is_valid():

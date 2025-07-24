@@ -30,20 +30,22 @@
                 <h5 class="description-text m-2">{{ video.description }}</h5>
             </span>
             <div class="video-details-comments mt-2">
-                <div class="d-flex flex-column justify-content-center">
-                    <form action="" method="post" class="comment-form">
-                        {% csrf_token %}
-                        <textarea name="comment" placeholder="Write a comment..." class="comment-textarea"></textarea>
-                        <button id="cancelCommentBtn" 
-                                type="button" 
-                                class="btn btn-danger comment-submit-btn"
-                                style="display: none;">
-                                Cancel
-                        </button>
-                        <button type="submit" class="btn btn-primary comment-submit-btn">Comment</button>
-                    </form>
-                </div>
-                <div class="comments-list mt-5">
+                {% if request.user.is_authenticated %}
+                    <div class="d-flex flex-column justify-content-center mb-5">
+                        <form action="" method="post" class="comment-form">
+                            {% csrf_token %}
+                            <textarea name="comment" placeholder="Write a comment..." class="comment-textarea"></textarea>
+                            <button id="cancelCommentBtn" 
+                                    type="button" 
+                                    class="btn btn-danger comment-submit-btn"
+                                    style="display: none;">
+                                    Cancel
+                            </button>
+                            <button type="submit" class="btn btn-primary comment-submit-btn">Comment</button>
+                        </form>
+                    </div>
+                {% endif %}
+                <div class="comments-list">
                     {% for comment in comments %}
                         <div class="card mb-2">
                             <div class="card-body">
