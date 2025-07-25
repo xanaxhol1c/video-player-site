@@ -63,6 +63,10 @@ MIDDLEWARE = [
     'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
+CSRF_TRUSTED_ORIGINS = [
+    "https://video-player-site-production.up.railway.app",
+]
+
 ROOT_URLCONF = 'video_player_site.urls'
 
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
