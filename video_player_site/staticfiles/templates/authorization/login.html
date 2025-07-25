@@ -1,0 +1,23 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+{% block title %}Login{% endblock title %}
+
+{% block content %}
+    <div class="register-container">
+        <div class="register-title">Login</div>
+        <form method="POST" action="">
+            {% csrf_token %}
+            <div class="mb-3">
+                <input type="text" class="form-control register-input" name="username" placeholder="Username" required>
+            </div>
+            <div class="mb-3">
+                <input type="password" class="form-control register-input" name="password" placeholder="Password" required>
+            </div>
+            <button type="submit" class="btn btn-primary w-100 register-btn">Login</button>
+        </form>
+        <div class="login-link">
+            Don't have an account? <a href="/login/">Register</a>
+        </div>
+    </div>
+{% endblock content %}

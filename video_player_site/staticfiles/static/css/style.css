@@ -1,0 +1,313 @@
+@font-face {
+    font-family: "HelveticaNeue-Medium";
+    src: url('../fonts/HelveticaNeue-Medium.otf') format("truetype");
+}
+
+body{
+    display: flex;
+    flex-direction: column;
+    font-size: 18px;
+    font-family: "HelveticaNeue-Medium";
+    overflow-x: hidden;
+    min-height: 100vh;
+}
+
+header{
+    display: flex;
+    align-items: center;
+    background-color: rgb(31, 31, 31);
+    height: 60px;
+}
+
+a{
+    text-decoration: none;
+    color: black;
+}
+
+ul{
+    list-style: none;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+li {
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+
+.header-nav, .header-list{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    flex-wrap: wrap;
+}
+
+.nav-a{
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+.header-nav{
+    margin-left: 5%;
+}
+
+.container{
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+/* styles for index page */
+
+.video-image-card {
+    aspect-ratio: 16 / 9;
+    width: 100%;
+    object-fit: cover; 
+    display: block;
+}
+
+.chart-paginator {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-top: auto;
+    padding: 15px 0;
+}
+
+.disabled{
+    text-decoration: none;
+    color: grey;
+}
+
+/* styles for registration page */
+
+.register-container {
+    max-width: 400px;
+    width: 100%;
+    margin: 50px auto;
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 16px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.register-title {
+    font-size: 1.8rem;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 25px;
+    color: #333;
+}
+
+.register-input {
+    height: 45px;
+    border-radius: 12px;
+    border: 1px solid #ccc;
+    padding: 10px 15px;
+    transition: border 0.2s ease-in-out;
+}
+
+.register-input:focus {
+    border-color: #007bff;
+    outline: none;
+    box-shadow: 0 0 5px rgba(0,123,255,0.25);
+}
+
+.register-btn {
+    height: 45px;
+    border-radius: 12px;
+    font-weight: 600;
+}
+
+.login-link {
+    text-align: center;
+    margin-top: 15px;
+    font-size: 0.95rem;
+}
+
+.login-link a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.login-link a:hover {
+    text-decoration: underline;
+}
+
+/* styles for video details */
+
+.video-container{
+    display: flex;
+    flex-direction: column;
+    width: 75%;
+    gap: 15px;
+}
+
+.player-frame {
+    aspect-ratio: 16 / 9;
+    width: 100%;
+    height: auto;
+    object-fit: cover; 
+    display: block;
+}
+
+.video-like-btn{
+    all: unset;
+    display: flex;
+    cursor: pointer;
+}
+
+.description-span{
+    border: solid 1px; 
+    border-radius: 10px;
+    /* background-color: #fafafa; */
+}
+
+.description-text {
+    white-space: pre-wrap;     
+    word-wrap: break-word;     
+    overflow-wrap: break-word; 
+    max-width: 100%;           
+}
+
+.video-image-card{
+    aspect-ratio: 16 / 9;
+    width: 100%;
+    object-fit: cover; 
+    display: block;
+}
+
+.recommendations-container{
+    display: flex;
+    width: 20%;
+    align-items: center;
+}
+
+.comment-form{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 10px;
+}
+
+.comment-textarea{
+    width: 100%;
+    height: 75px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    padding: 10px 15px;
+    font-size: 16px;
+    line-height: 1.5;
+    text-align: left; 
+    font-family: inherit;
+    transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    overflow: hidden;
+    resize: none;
+}
+
+.comment-submit-btn{
+    height: 50px;
+}
+
+/* styles for liked videos page */
+
+.liked-videos-list {
+    padding: 0;
+}
+
+.liked-video-item {
+    border: 1px solid #eee;
+    padding: 10px 15px;
+    border-radius: 6px;
+    margin-bottom: 10px;
+    background-color: #fafafa;
+}
+
+.video-link {
+    font-weight: 500;
+    font-size: 16px;
+    text-decoration: none;
+    color: #333;
+}
+
+.video-link:hover {
+    text-decoration: underline;
+}
+
+.thumb-img {
+    aspect-ratio: 16 / 9;
+    width: 250px;
+    height: auto;
+    border-radius: 4px;
+    object-fit: cover;
+}
+
+/* styles for uploading videos */
+
+.upload-video-input{
+    height: 45px;
+    width: 500px;
+    border-radius: 12px;
+    border: 1px solid #ccc;
+    padding: 10px 15px;
+    transition: border 0.2s ease-in-out;
+}
+
+.upload-video-select{
+    height: 45px;
+    width: 200px;
+    border-radius: 12px;
+    border: 1px solid #ccc;
+    padding: 10px 15px;
+    transition: border 0.2s ease-in-out;
+    
+}
+
+.upload-video-label{
+    width: 150px;
+}
+
+.upload-video-textarea {
+    width: 100%;
+    max-width: 500px;
+    height: 120px;
+    border-radius: 12px;
+    border: 1px solid #ccc;
+    padding: 10px 15px;
+    font-size: 16px;
+    line-height: 1.5;
+    resize: none; /* Вимикає зміну розміру */
+    text-align: left; /* Текст зліва (опціонально) */
+    font-family: inherit;
+    transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.upload-video-textarea:focus {
+    border-color: #007bff;
+    outline: none;
+    box-shadow: 0 0 4px rgba(0, 123, 255, 0.4);
+}
+
+.upload-video-btn{
+    height: 45px;
+    width: 250px;
+    border-radius: 10px;
+
+}
+
+footer{
+    bottom: 0;
+    width: 100%;
+    height: 35px;
+    background-color: #7a7a7a;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
