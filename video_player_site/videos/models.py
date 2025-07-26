@@ -29,7 +29,7 @@ class Video(models.Model):
     name = models.CharField(max_length=100, unique=True)
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True)
     slug = models.CharField(max_length=100, unique=True)
-    description = models.TextField(max_length=400)
+    description = models.TextField(max_length=1000)
     image = CloudinaryField('image', resource_type='image')
     video = CloudinaryField('video', resource_type='video')
     created_at = models.DateTimeField(auto_now_add=True)

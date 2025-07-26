@@ -13,7 +13,7 @@ class UploadVideoForm(forms.ModelForm):
     
     def save(self, commit=True):
         video = super().save(commit=False)
-        video.slug = slugify(video.name)
+        video.slug = slugify(str(video.name))
 
         if commit:
             video.save()
