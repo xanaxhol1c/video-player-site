@@ -30,7 +30,7 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', 'video-player-site-production.up.railway.app']
+ALLOWED_HOSTS = ['127.0.0.1', 'video-player-site-production.up.railway.app']
 
 AUTH_USER_MODEL = 'authorization.UserModel'
 
