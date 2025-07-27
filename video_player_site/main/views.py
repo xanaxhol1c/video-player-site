@@ -31,7 +31,7 @@ def check_role(role_name):
 def index(request):
     page = request.GET.get('page', 1)
     videos = Video.objects.filter(is_published=True)
-    paginator = Paginator(videos, 3)
+    paginator = Paginator(videos, 12)
     
     current_page = paginator.page((int(page)))
     return render(request, 'main/index.html', {'videos' : current_page})
