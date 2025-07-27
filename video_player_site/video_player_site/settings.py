@@ -28,9 +28,9 @@ load_dotenv(os.path.join(BASE_DIR, '.env'))
 SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['127.0.0.1', 'video-player-site-production.up.railway.app']
+ALLOWED_HOSTS = ['video-player-site-production.up.railway.app']
 
 AUTH_USER_MODEL = 'authorization.UserModel'
 
@@ -46,7 +46,6 @@ INSTALLED_APPS = [
     'main',
     'videos',
     'authorization',
-    'debug_toolbar',
     'cloudinary', 
     'cloudinary_storage',
 ]
@@ -55,7 +54,6 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
